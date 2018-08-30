@@ -25,7 +25,7 @@ SECRET_KEY = 'hcsi=gf-&sq&js8b!igjmfj17jik1-@3$nl7=qxz&ra^ec-8r_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-13-232-240-130.ap-south-1.compute.amazonaws.com']
 
 
 # Application definition
@@ -123,3 +123,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 's_assets'),
 )
+STATIC_ROOT = '~/static/'
