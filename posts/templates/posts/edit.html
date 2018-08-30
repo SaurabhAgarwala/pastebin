@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block one %}
+    <h1 class="login">Paste Title: {{ paste.title }}</h1>
+    <h6><em>This paste is editable. Edit the body of the paste, keeping the URL same as before.</em></h6>
+    <br>
+    <form class="post_create" action="{% url 'posts:edit' id=paste.id %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-primary" value="Edit the body">
+    </form>
+    <br>
+    <form class="post_create" action="{% url 'posts:delete' id=paste.id %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Delete this paste.">
+    </form>
+    <br>
+    {% if user.is_authenticated %}
+        <a href="{% url 'posts:post_login_create' %}"><h5>Go Back to Homepage</h5></a>
+    {% else %}
+        <a href="{% url 'posts:post_create' %}"><h5>Go Back to Homepage</h5></a>
+    {% endif %}
+{% endblock %}

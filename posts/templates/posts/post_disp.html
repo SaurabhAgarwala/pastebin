@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block one %}
+    <h1 class="login">Paste Title: {{ paste.title }}</h1>
+    <br>
+    <p class="text">Created on: {{ paste.date }}</p>
+    {% if paste.user %}
+        <p class="text">Created by: {{ paste.user }}</p>
+    {% else %}
+    <p class="text">Created by : Guest</p>
+    {% endif %}
+    <h6><em>This paste is not editable(write permsissions not assigned for public).{% if paste.user %} If you have created this paste then <a href="{% url 'accounts:login' %}">login</a> to edit it.{% endif %}</em></h6><br>
+   <p class="text">Body : {{ paste.body }}</p>
+   <br>
+    {% if user.is_authenticated %}
+        <a href="{% url 'posts:post_login_create' %}"><h5>Go Back to Homepage</h5></a>
+    {% else %}
+        <a href="{% url 'posts:post_create' %}"><h5>Go Back to Homepage</h5></a>
+    {% endif %}
+{% endblock %}

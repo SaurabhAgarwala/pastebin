@@ -1,0 +1,59 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta-charset="utf-8">
+        <title>PasteBin</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Arvo|Tangerine" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+        <header>
+            {% if user.is_authenticated %}
+            <div class="row">
+                <h1 class="title"><a href="{% url 'posts:post_login_create' %}">PasteBin</a></h1>
+            </div>
+            <div class="row"> 
+            <div class="col-md-9">
+                <p class="line">Paste and Generate your unique URL :)</p>
+            </div>
+            <nav class="navi col-md-3">
+                <form class="" action="{% url 'accounts:logout' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-info" value="Log Out">    
+                </form>
+            </nav>
+            </div>  
+            {% else %}
+            <div class="row">                   
+                <h1 class="title"><a href="{% url 'posts:post_create' %}">PasteBin</a></h1>
+            </div>
+            <div class="row"> 
+                <div class="col-md-8">
+                    <p class="line">Paste and Generate your unique URL :)</p>
+                </div>
+                <br>
+                <div class="nav col-md-4">
+                    <form class="col-md-6" action="{% url 'accounts:login' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-info" value="Log In">    
+                    </form>
+                    <form class="col-md-6" action="{% url 'accounts:signup' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-info" value="Sign Up">    
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </header>        
+        <div class="wrap">
+            {% block one %}
+            {% endblock %}
+        </div>
+        </div>
+    </body>
+</html>

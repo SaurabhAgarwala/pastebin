@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block one %}
+    <h1 class="login">SignUp Page</h1>
+    <form class="signup_form" action="{% url 'accounts:signup' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-success" value="Sign Up">
+    </form>
+    <br>
+    {% if user.is_authenticated %}
+        <a href="{% url 'posts:post_login_create' %}"><h5>Go Back to Homepage</h5></a>
+    {% else %}
+        <a href="{% url 'posts:post_create' %}"><h5>Go Back to Homepage</h5></a>
+    {% endif %}
+{% endblock %}

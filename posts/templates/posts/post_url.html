@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block one %}
+    <p class="text">
+        The unique URL of the paste just made by you is: <a href="{% url 'posts:disp' url=e_url %}">http://ec2-13-232-240-130.ap-south-1.compute.amazonaws.com:8000/posts/{{ e_url }}</a>
+    </p>
+    {% if user.is_authenticated %}
+        <a href="{% url 'posts:post_login_create' %}"><h5>Go Back to Homepage</h5></a>
+    {% else %}
+        <a href="{% url 'posts:post_create' %}"><h5>Go Back to Homepage</h5></a>
+    {% endif %}
+{% endblock %}

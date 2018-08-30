@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block one %}
+    <p>
+        {% if edited %}
+            The URL of the paste edited by you is same as before, that is: <a href="{% url 'posts:login_disp' url=e_url %}">http://ec2-13-232-240-130.ap-south-1.compute.amazonaws.com:8000/{{ e_url }}</a>
+        {% else %}
+            The unique URL of the paste just made by you is: <a href="{% url 'posts:login_disp' url=e_url %}">http://ec2-13-232-240-130.ap-south-1.compute.amazonaws.com:8000/{{ e_url }}</a>
+        {% endif %}
+    </p>
+{% endblock %}
