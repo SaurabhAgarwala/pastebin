@@ -66,7 +66,7 @@ def edit(request, id):
             s_instance = form.save(commit=False)
             s_instance.slug = e_url
             s_instance.title = heading
-            if request.user.is_authenticate: 	
+            if request.user.is_authenticated: 	
                 s_instance.user = request.user
             s_instance.editable = s_editable
             s_instance.save()
