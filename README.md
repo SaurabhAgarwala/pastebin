@@ -13,6 +13,13 @@ Just go to the URL of the deployed WebApp and then follow the video to see how t
 Django Framework was used to create this WebApp and it is deployed on AWS.
 
 Only problem being faced is that the a new user signup is not working on the deployed version, on the other hand it is working perfectly fine on the localhost despite of the exact code for the files concerned. I tried debugging this alot but in vain.
+So in order to test the app, the evaluator can use the following credentials:
+Username: test1 
+Password: hello9876
+  or
+  Username: test2
+  Password: abcd9876
+
 
 Help was taken from my previous WebApps like the BlogApp, the code of which is available on my GitHub Handle. Other than this I used stack overflow for debugging. 
 
