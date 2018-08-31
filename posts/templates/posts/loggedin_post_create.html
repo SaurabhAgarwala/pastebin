@@ -17,7 +17,7 @@
     <br>
     {% for paste in pastes %}
     <ul>   
-        <li><a href="{% url 'posts:edit' id=paste.pk %}">{{ paste.title }}</a> last updated on {{ paste.date }} The unique URL for this is <a href="{% url 'posts:disp' url=paste.slug %}">http://ec2-13-232-240-130.ap-south-1.compute.amazonaws.com:8000/posts/{{ paste.slug }}</a></li>
+        <li><a href="{% url 'posts:edit' id=paste.pk %}">{{ paste.title }}</a> last updated on {{ paste.date }} The unique URL for this is <a href="{% url 'posts:disp' url=paste.slug %}">http://ec2-13-232-43-59.ap-south-1.compute.amazonaws.com:8000/posts/{{ paste.slug }}</a></li>
     </ul>
     {% endfor %}
     {% endif %}
@@ -28,7 +28,7 @@
     <br>
     {% for paste in all_pastes %}
     <ul>
-        <li><a href="{% url 'posts:disp' url=paste.slug %}">{{ paste.title }}</a> which was last updated by{% if paste.user %} {{ paste.user }} {% else %} a Guest {% endif %} on {{ paste.date }}. The unique URL for this is <a href="{% url 'posts:disp' url=paste.slug %}">http://ec2-13-232-240-130.ap-south-1.compute.amazonaws.com:8000/posts/{{ paste.slug }}</a></li>
+        <li><a href="{% url 'posts:disp' url=paste.slug %}">{{ paste.title }}</a> which was last updated by{% if paste.user %} {{ paste.user }} {% else %} a Guest {% endif %} on {{ paste.date }}. The unique URL for this is <a href="{% url 'posts:disp' url=paste.slug %}">http://ec2-13-232-43-59.ap-south-1.compute.amazonaws.com:8000/posts/{{ paste.slug }}</a></li>
     </ul>
     {% endfor %}
     {% endif %}
