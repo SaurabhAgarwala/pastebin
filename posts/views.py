@@ -27,6 +27,38 @@ def paste_disp(request, url):
         return redirect('posts:edit', id=paste.id)
     return render(request, 'posts/post_disp.html', {'paste':paste})
 
+
+
+def edit(request, id):
+    paste = Content.objects.get(id=id)
+    if request.method == 'POST':
+        form = forms.PostEditForm(request.POST)
+        e_url = paste.slug
+        heading = paste.title
+        s_editable = paste.editable
+        edited = True
+        paste.delete()
+        if form.is_valid():
+            s_instance = form.save(commit=False)
+            s_instance.slug = e_url
+            s_instance.title = heading
+            if request.user.is_authenticated:
+                s_instance.user = request.user
+            s_instance.editable = s_editable
+            s_instance.save()
+        return render(request, 'posts/loggedin_post_url.html', {'e_url':e_url, 'edited':edited})
+    else:
+        form = forms.PostEditForm(instance=paste)
+    return render(request, 'posts/edit.html', {'form':form, 'paste':paste})
+
+def delete(request, id):
+    if request.method == 'POST':
+        paste = Content.objects.get(id=id)
+        paste.delete()
+        if request.user.is_authenticated:
+            return redirect('posts:post_login_create')
+        return redirect('posts:post_create')
+
 @login_required(login_url="/accounts/login/")
 def login_create(request):
     if request.method == 'POST':
@@ -46,40 +78,10 @@ def login_create(request):
     pastes = sorted(pastes,key=lambda x:x.date,reverse=True)
     return render(request, 'posts/loggedin_post_create.html', {'form':form, 'pastes':pastes, 'all_pastes':all_pastes })
 
+
 @login_required(login_url="/accounts/login/")
 def login_paste_disp(request, url):
     paste = Content.objects.get(slug=url)
     if paste.user == request.user:
         return redirect('posts:edit', id=paste.id)
     return render(request, 'posts/post_disp.html', {'paste':paste})
-
-def edit(request, id):
-    paste = Content.objects.get(id=id)
-    if request.method == 'POST':
-        form = forms.PostEditForm(request.POST)
-        e_url = paste.slug
-        heading = paste.title
-        s_editable = paste.editable
-        edited = True
-        paste.delete()
-        if form.is_valid():
-            s_instance = form.save(commit=False)
-            s_instance.slug = e_url
-            s_instance.title = heading
-            if request.user.is_authenticated: 	
-                s_instance.user = request.user
-            s_instance.editable = s_editable
-            s_instance.save()
-        return render(request, 'posts/loggedin_post_url.html', {'e_url':e_url, 'edited':edited})
-    else:
-        form = forms.PostEditForm(instance=paste)
-    return render(request, 'posts/edit.html', {'form':form, 'paste':paste})
-
-
-def delete(request, id):
-    if request.method == 'POST':
-        paste = Content.objects.get(id=id)
-        paste.delete()
-        if request.user.is_authenticated:
-            return redirect('posts:post_login_create')
-    return redirect('posts:post_login_create')

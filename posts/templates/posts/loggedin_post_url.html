@@ -2,9 +2,14 @@
 {% block one %}
     <p>
         {% if edited %}
-            The URL of the paste edited by you is same as before, that is: <a href="{% url 'posts:login_disp' url=e_url %}">http://ec2-13-232-240-130.ap-south-1.compute.amazonaws.com:8000/{{ e_url }}</a>
+            The URL of the paste edited by you is same as before, that is: <a href="{% url 'posts:disp' url=e_url %}">http://ec2-13-232-240-130.ap-south-1.compute.amazonaws.com:8000/{{ e_url }}</a>
         {% else %}
-            The unique URL of the paste just made by you is: <a href="{% url 'posts:login_disp' url=e_url %}">http://ec2-13-232-240-130.ap-south-1.compute.amazonaws.com:8000/{{ e_url }}</a>
+            The unique URL of the paste just made by you is: <a href="{% url 'posts:disp' url=e_url %}">http://ec2-13-232-240-130.ap-south-1.compute.amazonaws.com:8000/{{ e_url }}</a>
         {% endif %}
     </p>
+    {% if user.is_authenticated %}
+        <a href="{% url 'posts:post_login_create' %}"><h5>Go Back to Homepage</h5></a>
+    {% else %}
+        <a href="{% url 'posts:post_create' %}"><h5>Go Back to Homepage</h5></a>
+    {% endif %}
 {% endblock %}
