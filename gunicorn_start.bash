@@ -1,8 +1,8 @@
 #!/bin/bash
 
-NAME="django_app"                                   # Name of the application
+NAME="pastebin_app"                                   # Name of the application
 DJANGODIR=/home/ubuntu/pastebin               # Django project directory
-SOCKFILE=/home/ubuntu/django_env/run/gunicorn.sock  # we will communicte using this unix socket
+SOCKFILE=/home/ubuntu/django_env/run/gunicorn_pastebin.sock  # we will communicte using this unix socket
 USER=ubuntu                                         # the user to run as
 GROUP=ubuntu                                        # the group to run as
 NUM_WORKERS=3                                       # how many worker processes should Gunicorn spawn
