@@ -1,19 +1,28 @@
 {% extends 'base.html' %}
 
 {% block one %}
-    <h1 class="login">LogIn Page</h1>
-    <form class="login_form" action="{% url 'accounts:login' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% if request.GET.next %}
-            <input type="hidden" name="s@next" value="{{ request.GET.next }}">
-        {% endif %}
-        <input type="submit" class="btn btn-success" value="Log In">
-    </form>
-    <br>
-    {% if user.is_authenticated %}
-        <a href="{% url 'posts:post_login_create' %}"><h5>Go Back to Homepage</h5></a>
-    {% else %}
-        <a href="{% url 'posts:post_create' %}"><h5>Go Back to Homepage</h5></a>
-    {% endif %}
+<h1 class="login">LogIn Page</h1>
+<form class="login_form" action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <!-- {{ form.as_p }} -->
+    <!-- {% if request.GET.next %}
+    <input type="hidden" name="s@next" value="{{ request.GET.next }}">
+    {% endif %} -->
+    <div>{{ form.name }}</div>
+    <div>{{ form.password }}</div>
+    <input type="submit" class="btn btn-success" value="Log In">
+</form>
+{% if submit_error %}
+<h3>Either Password or Username is incorrect</h3>
+{% endif %}
+<br>
+{% if user.is_authenticated %}
+<a href="{% url 'post_login_create' %}">
+    <h5>Go Back to Homepage</h5>
+</a>
+{% else %}
+<a href="{% url 'post_create' %}">
+    <h5>Go Back to Homepage</h5>
+</a>
+{% endif %}
 {% endblock %}

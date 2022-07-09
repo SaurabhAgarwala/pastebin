@@ -56,8 +56,8 @@ def delete(request, id):
         paste = Content.objects.get(id=id)
         paste.delete()
         if request.user.is_authenticated:
-            return redirect('posts:post_login_create')
-        return redirect('posts:post_create')
+            return redirect('post_login_create')
+        return redirect('post_create')
 
 @login_required(login_url="/accounts/login/")
 def login_create(request):
@@ -83,5 +83,5 @@ def login_create(request):
 def login_paste_disp(request, url):
     paste = Content.objects.get(slug=url)
     if paste.user == request.user:
-        return redirect('posts:edit', id=paste.id)
+        return redirect('edit', id=paste.id)
     return render(request, 'posts/post_disp.html', {'paste':paste})
