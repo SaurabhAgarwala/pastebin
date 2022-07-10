@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block one %}
     <h1 class="text">Enter your contents and generate the unique URL</h1>
-    <form class="form-horizontal" action="{% url 'posts:post_login_create' %}" method="POST">
+    <form class="form-horizontal" action="{% url 'post_login_create' %}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <p>(Select editable to enable editing of paste by anyone with the unique URL)</p>
@@ -17,7 +18,7 @@
     <br>
     {% for paste in pastes %}
     <ul>   
-        <li><a href="{% url 'posts:edit' id=paste.pk %}">{{ paste.title }}</a> last updated on {{ paste.date }} The unique URL for this is <a href="{% url 'posts:disp' url=paste.slug %}">http://ec2-13-232-43-59.ap-south-1.compute.amazonaws.com:8000/posts/{{ paste.slug }}</a></li>
+        <li><a href="{% url 'edit' id=paste.pk %}">{{ paste.title }}</a> last updated on {{ paste.date }} The unique URL for this is <a href="{% url 'posts:disp' url=paste.slug %}">http://ec2-13-232-43-59.ap-south-1.compute.amazonaws.com:8000/posts/{{ paste.slug }}</a></li>
     </ul>
     {% endfor %}
     {% endif %}
@@ -28,9 +29,9 @@
     <br>
     {% for paste in all_pastes %}
     <ul>
-        <li><a href="{% url 'posts:disp' url=paste.slug %}">{{ paste.title }}</a> which was last updated by{% if paste.user %} {{ paste.user }} {% else %} a Guest {% endif %} on {{ paste.date }}. The unique URL for this is <a href="{% url 'posts:disp' url=paste.slug %}">http://ec2-13-232-43-59.ap-south-1.compute.amazonaws.com:8000/posts/{{ paste.slug }}</a></li>
+        <li><a href="{% url 'disp' url=paste.slug %}">{{ paste.title }}</a> which was last updated by{% if paste.user %} {{ paste.user }} {% else %} a Guest {% endif %} on {{ paste.date }}. The unique URL for this is <a href="{% url 'disp' url=paste.slug %}">http://ec2-13-232-43-59.ap-south-1.compute.amazonaws.com:8000/posts/{{ paste.slug }}</a></li>
     </ul>
     {% endfor %}
     {% endif %}
-    <script src="/static/slugify.js"></script>
+    <script src="{% static 'slugify.js' %}"></script>
 {% endblock %}

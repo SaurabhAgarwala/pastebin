@@ -119,8 +119,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 's_assets'),
-)
-STATIC_ROOT = '/home/ubuntu/static/'
+STATIC_URL = 'static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 's_assets'),
+# )
+# STATIC_ROOT = '/home/ubuntu/static/'
+
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
