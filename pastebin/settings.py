@@ -124,3 +124,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 's_assets'),
 )
 STATIC_ROOT = '/home/ubuntu/static/'
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
+
