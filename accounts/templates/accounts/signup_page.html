@@ -22,6 +22,14 @@
 {% if error.error %}
 <p class="text-danger">{{ error.message}}</p>
 {% endif %}
-<a href="{% url 'posts:post_create' %}"><h5>Go Back to Homepage</h5></a>
+{% if form.is_authenticated %}
+<a href="{% url 'posts:post_login_create' %}">
+    <h5>Go Back to Homepage</h5>
+</a>
+{% else %}
+<a href="{% url 'posts:post_create' %}">
+    <h5>Go Back to Homepage</h5>
+</a>
+{% endif %}
 
 {% endblock %}

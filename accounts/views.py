@@ -37,6 +37,7 @@ def logout_view(request):
         return redirect('posts:post_create')
 
 def update_error(form):
+    # this function returns the right error message
     error = {}
     try:
         err =form.errors.as_text().split("*")
