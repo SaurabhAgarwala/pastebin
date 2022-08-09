@@ -1,16 +1,35 @@
 {% extends 'base.html' %}
-
 {% block one %}
-    <h1 class="login">SignUp Page</h1>
-    <form class="signup_form" action="{% url 'accounts:signup' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" class="btn btn-success" value="Sign Up">
-    </form>
-    <br>
-    {% if user.is_authenticated %}
-        <a href="{% url 'posts:post_login_create' %}"><h5>Go Back to Homepage</h5></a>
-    {% else %}
-        <a href="{% url 'posts:post_create' %}"><h5>Go Back to Homepage</h5></a>
-    {% endif %}
+<h1 class="login">SignUp Page</h1>
+<form method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password1.label_tag }}</td>
+            <td>{{ form.password1 }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password2.label_tag }}</td>
+            <td>{{ form.password2 }}</td>
+        </tr>
+    </table>
+    <input type="submit" class="btn btn-success" value="Sign Up">
+</form>
+{% if error.error %}
+<p class="text-danger">{{ error.message}}</p>
+{% endif %}
+{% if form.is_authenticated %}
+<a href="{% url 'posts:post_login_create' %}">
+    <h5>Go Back to Homepage</h5>
+</a>
+{% else %}
+<a href="{% url 'posts:post_create' %}">
+    <h5>Go Back to Homepage</h5>
+</a>
+{% endif %}
+
 {% endblock %}
